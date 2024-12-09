@@ -1,7 +1,11 @@
 import streamlit as st
 
+
 # App Title
 st.title("Meal Prep Menu")
+
+# Universal toggle for nutritional info
+show_nutrition = st.checkbox("Show nutritional information")
 
 # Categories and their items
 menu = {
@@ -19,11 +23,11 @@ menu = {
         {"name": "Teriyaki Chicken with Thai Basil Rice Noodles", 
          "info": "977 Calories, 42g Protein, 185g Carbs, 4g Fat (DF)"},
         {"name": "Tandoori Chicken with Yellow Rice & Curry Cauliflower", 
-         "info": "930 Calories, 41g Protein, 161g Carbs, 51g Fat (GF)**"},
+         "info": "930 Calories, 41g Protein, 161g Carbs, 51g Fat (GF)"},
         {"name": "Jerk Chicken with Plantains & Vegetables", 
-         "info": "817 Calories, 39g Protein, 68g Carbs, 51g Fat (GF, DF)**"},
+         "info": "817 Calories, 39g Protein, 68g Carbs, 51g Fat (GF, DF)"},
         {"name": "Chicken Sausage with Peppers & Potatoes", 
-         "info": "481 Calories, 27g Protein, 46g Carbs, 22g Fat**"}
+         "info": "481 Calories, 27g Protein, 46g Carbs, 22g Fat"}
     ],
     "Seafood": [
         {"name": "BBQ Atlantic Salmon with Squash & Potatoes", 
@@ -66,15 +70,12 @@ menu = {
     ]
 }
 
-# Universal toggle for nutritional info
-show_nutrition = st.checkbox("Show nutritional information")
-
 # Display each category
 for category, items in menu.items():
     with st.expander(category):
         for item in items:
             st.markdown(f"**{item['name']}**")
-            if show_nutrition:
+            if show_nutrition or category == "Meal Prep Packages":
                 st.write(item['info'])
 
 # Footer
